@@ -13,7 +13,7 @@ namespace Testing
 {
     public partial class Form1 : Form
     {
-        player newChar = new player(Testing.Properties.Resources.mc);
+        player newChar = new player(Testing.Properties.Resources.kanye);
 
         public Form1()
         {
@@ -23,28 +23,26 @@ namespace Testing
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
         }
 
  
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left)
-            {
-                newChar.move("W");
-            }
-            else if (e.KeyCode == Keys.Right)
-            {
-                newChar.move("E");
-            }
-            else if (e.KeyCode == Keys.Up)
-            {
-                newChar.move("N");
-            }
-            else if (e.KeyCode == Keys.Down)
-            {
-                newChar.move("S");
-            }
+            Console.WriteLine("Hello!");
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("Bye!");
+            newChar.move("S");
             newChar.draw(ref panel1);
         }
     }

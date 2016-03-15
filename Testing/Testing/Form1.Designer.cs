@@ -40,6 +40,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 
@@ -47,6 +48,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(549, 445);
             this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // Form1
             // 
