@@ -18,21 +18,23 @@ namespace Testing
         public Form1()
         {
             InitializeComponent();
+            this.Focus();
+            this.KeyPress += new KeyPressEventHandler(KeyPressingMethod);
         }
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
- 
-
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void KeyPressingMethod(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
-            Console.WriteLine("Hello!");
-
+            Console.WriteLine("Hello World!");
+            Console.WriteLine(e.ToString());
+            e.Handled = true;
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
