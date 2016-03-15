@@ -34,15 +34,10 @@ namespace Testing
 
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Bye!");
-            newChar.move("S");
+            Console.WriteLine("Happy Pi Day!!!");
+            newChar.move("W");
             newChar.draw(ref panel1);
         }
     }
