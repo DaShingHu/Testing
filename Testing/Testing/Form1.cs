@@ -36,8 +36,8 @@ namespace Testing
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Happy Pi Day!!!");
-            newChar.move("W");
+            Console.WriteLine("Round 2");
+            newChar.move("E");
             newChar.draw(panel1);
         }
     }
