@@ -38,7 +38,7 @@ namespace Testing
         {
             Console.WriteLine("Happy Pi Day!!!");
             newChar.move("W");
-            newChar.draw(ref panel1);
+            newChar.draw(panel1);
         }
     }
 }

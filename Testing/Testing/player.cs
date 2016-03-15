@@ -49,7 +49,7 @@ namespace Testing
                 this.y--;
             }
         }
-        public void draw(ref Panel target) {
+        public void draw(Panel target) {
 
             Graphics g = target.CreateGraphics();
             g.DrawImage(this.self, this.x, this.y);
