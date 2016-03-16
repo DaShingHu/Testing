@@ -52,6 +52,7 @@ namespace Testing
         public void draw(Panel target) {
 
             Graphics g = target.CreateGraphics();
+            g.Clear(Color.White);
             g.DrawImage(this.self, this.x, this.y);
         }
     }
