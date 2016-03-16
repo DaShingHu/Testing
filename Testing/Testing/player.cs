@@ -42,11 +42,11 @@ namespace Testing
             }
             else if (direction == "N")
             {
-                this.y++;
-            }
-            else
-            {
                 this.y--;
+            }
+            else if (direction == "S")
+            {
+                this.y++;
             }
         }
         public void draw(Panel target) {

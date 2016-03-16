@@ -25,13 +25,16 @@ namespace Testing
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            Console.WriteLine("Welcome!");
         }
 
         private void KeyPressingMethod(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
-            Console.WriteLine("Hello World!");
-            Console.WriteLine(e.ToString());
+            Console.WriteLine("Hello from the other side!");
+            Console.WriteLine(e.KeyChar.ToString());
+
+            newChar.move(Char.ToUpper(e.KeyChar).ToString());
+            newChar.draw(panel1);
             e.Handled = true;
         }
 
