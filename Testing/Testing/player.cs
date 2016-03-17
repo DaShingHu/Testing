@@ -8,11 +8,12 @@ using System.Windows.Forms;
 
 namespace Testing
 {
-    class player
+    class player : InteractableObject
     {
         Bitmap self;
-        int x;
-        int y;
+        private int x;
+        private int y;
+        private int priority;
 
         public player()
         {
@@ -26,6 +27,19 @@ namespace Testing
             this.y = 0;
         }
 
+        public void setX(int input)
+        {
+            // Sets x value
+            this.x = input;
+        }
+        public void setY(int input)
+        {
+            this.y = input;
+        }
+        public void setPriority(int input)
+        {
+            this.priority = input;
+        }
         public void move (String direction)
         {
             // E = +1
@@ -49,10 +63,18 @@ namespace Testing
                 this.y++;
             }
         }
-        public void draw(Panel target) {
-
-            Graphics g = target.CreateGraphics();
-            g.Clear(Color.White);
+        // This means to implement the method
+        public override void draw(Graphics g)
+        {
+            g.DrawImage(this.self, this.x, this.y);
+        }
+        public override int priorityValueIs()
+        {
+            return this.priority;
+        }
+        
+        public void drawTwo(Graphics g)
+        {
             g.DrawImage(this.self, this.x, this.y);
         }
     }

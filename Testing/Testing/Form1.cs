@@ -13,7 +13,7 @@ namespace Testing
 {
     public partial class Form1 : Form
     {
-        player newChar = new player(Testing.Properties.Resources.kanye);
+        Game newGame;
 
         public Form1()
         {
@@ -26,6 +26,7 @@ namespace Testing
         private void Form1_Load(object sender, EventArgs e)
         {
             Console.WriteLine("Welcome!");
+            newGame = new Game(panel1);
         }
 
         private void KeyPressingMethod(object sender, System.Windows.Forms.KeyPressEventArgs e)
@@ -33,17 +34,16 @@ namespace Testing
             Console.WriteLine("Hello from the other side!");
             Console.WriteLine(e.KeyChar.ToString());
 
-            newChar.move(Char.ToUpper(e.KeyChar).ToString());
-            newChar.draw(panel1);
+
+            newGame.MainCharacter.move(Char.ToUpper(e.KeyChar).ToString());
+            newGame.draw();
             e.Handled = true;
         }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Round 2");
-            newChar.move("E");
-            newChar.draw(panel1);
+
         }
     }
 }
