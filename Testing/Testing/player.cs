@@ -8,63 +8,23 @@ using System.Windows.Forms;
 
 namespace Testing
 {
-    class player : InteractableObject
+    class Player : InteractableObject
     {
-        Bitmap self;
-        private int x;
-        private int y;
-        private int priority;
 
-        public player()
-        {
+      //  public Player()
+       // {
             // Default constructor
-            self = new Bitmap(64, 64);
-        }
-        public player(Image inputImage)
+      //      self = new Bitmap(64, 64);
+      //  }
+
+        public Player(Image inputImage, int priority)
+            : base(inputImage, false, 0, 0, priority)
         {
-            self = new Bitmap(inputImage);
-            this.x = 0;
-            this.y = 0;
         }
 
-        public void setX(int input)
-        {
-            // Sets x value
-            this.x = input;
-        }
-        public void setY(int input)
-        {
-            this.y = input;
-        }
-        public void setPriority(int input)
-        {
-            this.priority = input;
-        }
-        public void move (String direction)
-        {
-            // E = +1
-            // W = -1
-            // N = +1
-            // S = -1
-            if (direction == "E")
-            {
-                this.x++;
-            }
-            else if (direction == "W")
-            {
-                this.x--;
-            }
-            else if (direction == "N")
-            {
-                this.y--;
-            }
-            else if (direction == "S")
-            {
-                this.y++;
-            }
-        }
+       
         // This means to implement the method
-        public override void draw(Graphics g)
+    /*    public override void draw(Graphics g)
         {
             g.DrawImage(this.self, this.x, this.y);
         }
@@ -77,5 +37,6 @@ namespace Testing
         {
             g.DrawImage(this.self, this.x, this.y);
         }
+     */ 
     }
 }

@@ -12,7 +12,9 @@ namespace Testing
     {
         List<InteractableObject> listOfObjectsInGame;
         Panel targetPanel;
-        public player MainCharacter;
+        public Player MainCharacter;
+        public Item item;
+        
 
         private static int ComparePriorities(InteractableObject x, InteractableObject y)
         {
@@ -61,8 +63,8 @@ namespace Testing
         public Game(Panel target)
         {
             targetPanel = target;
-            MainCharacter = new player(Properties.Resources.kanye);
-            MainCharacter.setPriority(99999);
+            MainCharacter = new Player(Properties.Resources.Char,99999);
+        //    MainCharacter.setPriority(99999);
             listOfObjectsInGame = new List<InteractableObject>();
             this.init(); 
         }
@@ -71,11 +73,12 @@ namespace Testing
         {
             // Initialization function
 
-            player lightbulb = new player(Properties.Resources.lightbulb);
-            lightbulb.setPriority(1);
+            item = new Item(Properties.Resources.pokeball,1);
+        //    item.setPriority(1);
+            item.setX(100);
 
             listOfObjectsInGame.Add(MainCharacter);
-            listOfObjectsInGame.Add(lightbulb);
+            listOfObjectsInGame.Add(item);
             listOfObjectsInGame.Sort(ComparePriorities);
 
             for (int i = 0; i < listOfObjectsInGame.Count; i++)
@@ -87,7 +90,9 @@ namespace Testing
         public void draw()
         {
             Graphics g = targetPanel.CreateGraphics();
-            g.Clear(Color.Black);
+            g.Clear(Color.White);
+            g.DrawImage(Properties.Resources.background, 0, 0);
+            
             Console.WriteLine(listOfObjectsInGame.Count);
             for (int i = 0; i < listOfObjectsInGame.Count ; i++)
             {

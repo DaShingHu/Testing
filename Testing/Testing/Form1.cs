@@ -27,13 +27,13 @@ namespace Testing
         {
             Console.WriteLine("Welcome!");
             newGame = new Game(panel1);
+      
         }
 
         private void KeyPressingMethod(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
             Console.WriteLine("Hello from the other side!");
             Console.WriteLine(e.KeyChar.ToString());
-
 
             newGame.MainCharacter.move(Char.ToUpper(e.KeyChar).ToString());
             newGame.draw();

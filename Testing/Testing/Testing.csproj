@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Game.cs" />
     <Compile Include="InteractableObject.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,6 +104,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\lightbulb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\char.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Char.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\pokeball.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
