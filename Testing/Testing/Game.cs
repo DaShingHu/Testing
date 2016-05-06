@@ -18,6 +18,7 @@ namespace Testing
         public Thread drawThread;
         public System.Timers.Timer aTimer;
         System.Diagnostics.Stopwatch gameWatch;
+        public Boolean isOver;
 
 
 
@@ -71,6 +72,7 @@ namespace Testing
             MainCharacter = new Player(Properties.Resources.Char, 99999);
             //    MainCharacter.setPriority(99999);
             listOfObjectsInGame = new List<InteractableObject>();
+            this.isOver = false;
             this.init();
         }
 
@@ -114,6 +116,7 @@ namespace Testing
         public void gameOver()
         {
             //Console.WriteLine("Collision");
+            this.isOver = true;
             Graphics g = targetPanel.CreateGraphics();
             Font dank = new Font("Comic Sans", 12, FontStyle.Bold);
             SolidBrush testBrush = new SolidBrush(Color.Aquamarine);
@@ -174,44 +177,38 @@ namespace Testing
 
             if (direction == "W")
                 direction = "N";
-            if (direction == "A")
+            else if (direction == "A")
                 direction = "W";
-            if (direction == "D")
+            else if (direction == "D")
                 direction = "E";
 
-
-            for (int i = 0; i < 5; i++)
+            if (this.isCollide(a, b) == true)
             {
-                if (this.isCollide(a, b) == true)
+                /* Commenting out code that bumps you back!
+                if (direction == "W")
                 {
-                    /* Commenting out code that bumps you back!
-                    if (direction == "W")
-                    {
-                        direction = "E";
-                    }
-                    else if (direction == "E")
-                    {
-                        direction = "W";
-                    }
-                    else if (direction == "N")
-                    {
-                        direction = "S";
-                    }
-                    else if (direction == "S")
-                    {
-                        direction = "N";
-                    }
-                    */
-                    this.gameOver();
+                    direction = "E";
                 }
-                else
+                else if (direction == "E")
                 {
-                    this.MainCharacter.move(direction);
+                    direction = "W";
                 }
-
-
+                else if (direction == "N")
+                {
+                    direction = "S";
+                }
+                else if (direction == "S")
+                {
+                    direction = "N";
+                }
+                */
+                this.gameOver();
             }
-            this.draw();
+            else
+            {
+                this.MainCharacter.move(direction);
+                this.draw();
+            }
 
         }
         private Boolean isCollide(InteractableObject a, InteractableObject b)
