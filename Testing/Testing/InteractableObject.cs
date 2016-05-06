@@ -11,15 +11,15 @@ namespace Testing
     abstract class InteractableObject
     {
         // Priority is largest numbers = last drawn
-        
+
         public Bitmap self;
         protected int x;
         protected int y;
         protected int priority;
         protected Boolean passThrough;
 
-  //      abstract public void draw(Graphics g);
-  //      abstract public int priorityValueIs();
+        //      abstract public void draw(Graphics g);
+        //      abstract public int priorityValueIs();
 
         public InteractableObject(Image inputImage, Boolean isPass, int x, int y, int priority)
         {
@@ -66,6 +66,30 @@ namespace Testing
                 this.y++;
             }
         }
+        public void pass()
+        {
+            this.passThrough = false;
+        }
+
+        public int getX()
+        {
+            return this.x;
+        }
+
+        public int getY()
+        {
+            return this.y;
+        }
+        public int getWidth()
+        {
+            return this.self.Width;
+        }
+        public int getHeight()
+        {
+            return this.self.Height;
+        }
+
+
 
         public void draw(Graphics g)
         {
