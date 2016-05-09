@@ -31,7 +31,8 @@ namespace Testing
 
         private void KeyPressingMethod(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
-            newGame.move(Char.ToUpper(e.KeyChar).ToString());
+            for (int i = 0; i < 10; i++)
+                newGame.move(Char.ToUpper(e.KeyChar).ToString());
             //newGame.draw();
             e.Handled = true;
         }

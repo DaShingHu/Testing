@@ -88,9 +88,6 @@ namespace Testing
         {
             return this.self.Height;
         }
-
-
-
         public void draw(Graphics g)
         {
             g.DrawImage(this.self, this.x, this.y);

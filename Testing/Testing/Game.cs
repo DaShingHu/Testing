@@ -84,7 +84,8 @@ namespace Testing
             //    item.setPriority(1);
             item.setX(300);
             item.setY(10);
-            MainCharacter.setX(1);
+            MainCharacter.setX(0);
+            MainCharacter.setY(500);
             item.pass();
             listOfObjectsInGame.Add(MainCharacter);
             listOfObjectsInGame.Add(item);
@@ -156,11 +157,11 @@ namespace Testing
                 this.gameOver();
             else
             {
-                if (gameWatch.ElapsedTicks % 10 == 0)
+                if (gameWatch.ElapsedTicks % 1000 == 0)
                 {
-                    this.draw();
+                    moveEnvironment();
                 }
-                moveEnvironment();
+                this.draw();
             }
         }
 
@@ -207,7 +208,6 @@ namespace Testing
             else
             {
                 this.MainCharacter.move(direction);
-                this.draw();
             }
 
         }
