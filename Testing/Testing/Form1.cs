@@ -18,6 +18,9 @@ namespace Testing
         public Form1()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            //this.SetStyle(ControlStyles.AllPaintingInWmPaint,true);
             this.Focus();
             this.KeyPress += new KeyPressEventHandler(KeyPressingMethod);
         }
@@ -25,16 +28,43 @@ namespace Testing
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            newGame = new Game(panel1);
 
         }
 
         private void KeyPressingMethod(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
             for (int i = 0; i < 10; i++)
-                newGame.move(Char.ToUpper(e.KeyChar).ToString());
-            //newGame.draw();
+            {
+                if (newGame.isOver)
+                {
+                    btnExit.Visible = true;
+                    newGame.gameOver();
+                }
+                else
+                    newGame.move(Char.ToUpper(e.KeyChar).ToString());
+            }//newGame.draw();
             e.Handled = true;
+
+        }
+
+        private void btn1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            newGame = new Game(picBox);
+            btnStart.Visible = false;
+            btnExit.Visible = false;
+            lblTitle.Visible = false;
+            picBox.Visible = true;
+            this.Focus();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

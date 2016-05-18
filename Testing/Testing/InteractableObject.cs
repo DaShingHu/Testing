@@ -12,7 +12,7 @@ namespace Testing
     {
         // Priority is largest numbers = last drawn
 
-        public Bitmap self;
+        public Bitmap selfImage;
         protected int x;
         protected int y;
         protected int priority;
@@ -23,7 +23,7 @@ namespace Testing
 
         public InteractableObject(Image inputImage, Boolean isPass, int x, int y, int priority)
         {
-            self = new Bitmap(inputImage);
+            this.selfImage = new Bitmap(inputImage);
             passThrough = isPass;
             this.x = x;
             this.y = y;
@@ -82,15 +82,15 @@ namespace Testing
         }
         public int getWidth()
         {
-            return this.self.Width;
+            return this.selfImage.Width;
         }
         public int getHeight()
         {
-            return this.self.Height;
+            return this.selfImage.Height;
         }
         public void draw(Graphics g)
         {
-            g.DrawImage(this.self, this.x, this.y);
+            g.DrawImage(this.selfImage, this.x, this.y);
         }
         public int priorityValueIs()
         {

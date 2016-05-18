@@ -12,16 +12,14 @@ namespace Testing
     class Game
     {
         List<InteractableObject> listOfObjectsInGame;
-        Panel targetPanel;
+        PictureBox targetPanel;
         public Player MainCharacter;
         public Item item;
         public Thread drawThread;
         public System.Timers.Timer aTimer;
         System.Diagnostics.Stopwatch gameWatch;
         public Boolean isOver;
-
-
-
+        public Graphics g;
         private static int ComparePriorities(InteractableObject x, InteractableObject y)
         {
             // Compares the priorities of two objects, x and y
@@ -66,9 +64,9 @@ namespace Testing
             targetPanel = null;
             listOfObjectsInGame = new List<InteractableObject>();
         }
-        public Game(Panel target)
+        public Game(PictureBox target)
         {
-            targetPanel = target;
+            g = target.CreateGraphics();
             MainCharacter = new Player(Properties.Resources.Char, 99999);
             //    MainCharacter.setPriority(99999);
             listOfObjectsInGame = new List<InteractableObject>();
@@ -87,6 +85,7 @@ namespace Testing
             MainCharacter.setX(0);
             MainCharacter.setY(500);
             item.pass();
+            this.isOver = false;
             listOfObjectsInGame.Add(MainCharacter);
             listOfObjectsInGame.Add(item);
             listOfObjectsInGame.Sort(ComparePriorities);
@@ -102,10 +101,7 @@ namespace Testing
 
         public void draw()
         {
-            Graphics g = targetPanel.CreateGraphics();
-            g.Clear(Color.White);
             g.DrawImage(Properties.Resources.background, 0, 0);
-
             //Console.WriteLine(listOfObjectsInGame.Count);
             for (int i = 0; i < listOfObjectsInGame.Count; i++)
             {
@@ -118,10 +114,8 @@ namespace Testing
         {
             //Console.WriteLine("Collision");
             this.isOver = true;
-            Graphics g = targetPanel.CreateGraphics();
             Font dank = new Font("Comic Sans", 12, FontStyle.Bold);
             SolidBrush testBrush = new SolidBrush(Color.Aquamarine);
-            g.Clear(Color.White);
             g.DrawImage(Properties.Resources.sadpika, 0, 0);
             g.DrawString("You have lost. :(", dank, testBrush, 10, 10);
             gameWatch.Stop();
@@ -130,6 +124,7 @@ namespace Testing
             g.DrawString("Time Elapsed: " + time, dank, testBrush, 10, 50);
             aTimer.Stop();
             aTimer.Dispose();
+
         }
         public void moveThings()
         {
@@ -137,7 +132,7 @@ namespace Testing
             gameWatch.Start();
             aTimer = new System.Timers.Timer();
             aTimer.Elapsed += myTimer_Elapsed;
-            aTimer.Interval = 100;
+            aTimer.Interval = 10;
             aTimer.Enabled = true;
             aTimer.Start();
 
@@ -153,15 +148,18 @@ namespace Testing
         }
         private void myTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (this.isCollide(this.MainCharacter, this.item))
-                this.gameOver();
-            else
+            lock (this.MainCharacter)
             {
-                if (gameWatch.ElapsedTicks % 1000 == 0)
+                if (this.isCollide(this.MainCharacter, this.item))
+                    this.gameOver();
+                else
                 {
-                    moveEnvironment();
-                }
-                this.draw();
+                    if (gameWatch.ElapsedTicks % 10 == 0)
+                    {
+                        moveEnvironment();
+                    }
+                    this.draw();
+                }                
             }
         }
 
@@ -182,49 +180,42 @@ namespace Testing
                 direction = "W";
             else if (direction == "D")
                 direction = "E";
-
-            if (this.isCollide(a, b) == true)
+            lock (a)
             {
-                /* Commenting out code that bumps you back!
-                if (direction == "W")
+                lock (b)
                 {
-                    direction = "E";
+                    if (this.isCollide(a, b) == true)
+                        this.isOver = true;
+                    else
+                        this.MainCharacter.move(direction);
                 }
-                else if (direction == "E")
-                {
-                    direction = "W";
-                }
-                else if (direction == "N")
-                {
-                    direction = "S";
-                }
-                else if (direction == "S")
-                {
-                    direction = "N";
-                }
-                */
-                this.gameOver();
-            }
-            else
-            {
-                this.MainCharacter.move(direction);
-            }
 
+            }
         }
         private Boolean isCollide(InteractableObject a, InteractableObject b)
         {
             Boolean output = false;
-            if ((a.getX() < b.getX()) & (b.getX() < (a.getX() + a.getWidth()))
-                || (b.getX() < a.getX() & (b.getX() + b.getWidth() > a.getX())))
+            lock (a)
             {
-                if ((a.getY() < b.getY()) & (b.getY() < (a.getY() + a.getHeight()))
-                || (b.getY() < a.getY() & (b.getY() + b.getHeight() > a.getY())))
-                    output = true;
+                lock (b)
+                {
+                    if ((a.getX() < b.getX()) & (b.getX() < (a.getX() + a.getWidth()))
+                        || (b.getX() < a.getX() & (b.getX() + b.getWidth() > a.getX())))
+                    {
+                        if ((a.getY() < b.getY()) & (b.getY() < (a.getY() + a.getHeight()))
+                        || (b.getY() < a.getY() & (b.getY() + b.getHeight() > a.getY())))
+                            output = true;
+                    }                 
+                }
             }
-
-
-
             return output;
+        }
+
+        public void jump()
+        {
+            System.Diagnostics.Stopwatch jumpWatch = new System.Diagnostics.Stopwatch();
+            jumpWatch.Start();
+
         }
 
     }
